@@ -1,0 +1,32 @@
+.popup__button_actions_exit{
+  position: absolute;
+  font-weight: 400;
+  right: -32px;
+  top: -32px;
+  background-image: url(../../../../images/close.svg);
+  font-size: 0;
+  box-shadow: none;
+  color: white;
+  cursor: pointer;
+  border: none;
+  max-width: 32px;
+  min-height: 32px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  transition: 0.2s ease;
+}
+
+.popup__button_actions_exit:hover{
+  opacity: 0.6;
+}
+
+@media (max-width: 535px){
+  .popup__button_actions_exit{
+    top: -35px;
+    right: 0;
+    background-image: url(../../../../images/close_small.svg);
+    max-width: 20px;
+    min-height: 20px;
+  }
+}

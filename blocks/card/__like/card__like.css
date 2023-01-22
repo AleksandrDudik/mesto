@@ -1,0 +1,24 @@
+.card__like{
+  background-color: white;
+  background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 31px 18px 0 0;
+  width: 22px;
+  height: 19px;
+  border: none;
+  justify-self: end; 
+  grid-area: like;
+}
+
+.card__like:active{
+  opacity: 1;
+  background-image: url(../../../images/like_active.svg);
+}
+
+@media screen and (max-width: 980px){
+  .card__like{
+    margin-top: 0;
+    align-self: center;
+  }
+}

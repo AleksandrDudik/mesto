@@ -1,0 +1,15 @@
+.card__city{
+  color: black;
+  padding: 0;
+  margin: 24px 0 27px 21px;
+  max-width: 195px;
+  min-height: 29px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-area: city;
+}
