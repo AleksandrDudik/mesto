@@ -4,17 +4,17 @@ const changeForm = document.querySelector ('.popup__container');
 const buttonEdit = document.querySelector ('.profile__button_actions_edit');
 const nameGet = document.querySelector ('.profile__name');
 const jobGet = document.querySelector ('.profile__profession');
-let nameInput = changeForm.querySelector ('.popup__input_name');
-let jobInput =  changeForm.querySelector ('.popup__input_job');
+let nameInput = changeForm.querySelector ('.popup__input_type_name');
+let jobInput =  changeForm.querySelector ('.popup__input_type_job');
 
 function openPopup () {
-  popup.classList.add ('popup__opened');
+  popup.classList.add ('popup_opened');
   nameInput.value = nameGet.textContent;
   jobInput.value = jobGet.textContent;
 }
 
 function closePopup ()  {
-  popup.classList.remove ('popup__opened');
+  popup.classList.remove ('popup_opened');
 }
 
 function formSubmit (evt) {

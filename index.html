@@ -11,17 +11,16 @@
 </head>
 <body class="root">
   <header class="header">
-    <article class="header__logo">
-    </article>
+    <img src="images/logo.svg" class="header__logo" alt="Логотип">
   </header>
   <main class="content">
     <section class="profile">
       <img src="images/avatar.jpg" alt="Фото профиля" class="profile__avatar">
-      <article class="profile__info">
+      <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__profession">Исследователь океана</p>
         <button type="button" class="profile__button profile__button_actions_edit button"></button>
-      </article>
+      </div>
       <button type="button" class="profile__button profile__button_actions_add button"></button>
     </section>
     <section class="cards">
@@ -61,13 +60,15 @@
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
   <article class="popup">
-    <form method="post" name="form-popup" class="popup__container">
+    <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input name="input-name" type="text" value="" placeholder="Имя" class="popup__input popup__input_name">
-      <input name="input-job" type="text" value="" placeholder="Профессия" class="popup__input popup__input_job">
-      <button type="submit" value="save" class="popup__button popup__button_actions_submit">Сохранить</button>
-      <button type="button" value="close" class="popup__button popup__button_actions_exit">Закрыть</button>
-    </form>
+      <form method="post" name="form-popup" class="popup__form">
+        <input name="input-name" type="text" value="" placeholder="Имя" class="popup__input popup__input_type_name">
+        <input name="input-job" type="text" value="" placeholder="Профессия" class="popup__input popup__input_type_job">
+        <button type="submit" value="save" class="popup__button popup__button_actions_submit">Сохранить</button>
+        <button type="button" value="close" class="popup__button popup__button_actions_exit">Закрыть</button>
+      </form>
+    </div>
   </article>
   <script type="text/javascript" src="scripts/scripts.js"></script>
 </body>

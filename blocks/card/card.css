@@ -2,7 +2,6 @@
   background-color: white;
   border-radius: 10px;
   width: 100%;
-  min-height: 361px;
   box-sizing: border-box;
   display: grid;
   grid-template-rows: min-content 1fr;
@@ -10,16 +9,4 @@
   grid-template-areas:
     'image image'
     'city like';
-}
-
-@media screen and (max-width: 980px){
-  .card{
-    min-height: 37%;
-  }
-}
-
-@media screen and (max-width: 320px){
-  .card{
-    min-height: 361px;
-  }
 }
