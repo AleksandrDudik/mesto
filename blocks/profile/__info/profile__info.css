@@ -7,3 +7,9 @@
   column-gap: 18px;
   align-items: baseline;
 }
+
+@media screen and (max-width: 535px){
+  .profile__info{
+    margin: 0 0 0 36px;
+  }
+}
