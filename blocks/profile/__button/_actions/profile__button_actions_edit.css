@@ -7,6 +7,10 @@
   grid-area: editButton;
 }
 
+.profile__button_actions_edit:hover{
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 535px){
   .profile__button_actions_edit{
     width: 18px;
