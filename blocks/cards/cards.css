@@ -1,20 +1,9 @@
 .cards{
-  padding: 0;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(218px, 1fr));
-  grid-column-gap: 18px;
-  grid-row-gap: 21px;
+  margin: 0 auto;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
   .cards{
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 500px){
-  .cards{
-    grid-template-columns: repeat(1, 1fr);
+    padding: 0;
   }
 }

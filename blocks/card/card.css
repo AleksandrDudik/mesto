@@ -1,12 +1,22 @@
 .card{
-  background-color: white;
-  border-radius: 10px;
-  width: 100%;
-  box-sizing: border-box;
   display: grid;
-  grid-template-rows: min-content 1fr;
-  grid-template-columns: 1fr min-content;
-  grid-template-areas:
-    'image image'
-    'city like';
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-template-rows: 1fr 1fr;
+  gap: 20px 17px;
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 1280px){
+  .card{
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 618px){
+   .card{
+     margin: auto;
+  }
 }
