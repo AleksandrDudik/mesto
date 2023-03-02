@@ -7,8 +7,8 @@ const popupEditProfile = document.querySelector('.popup_edit_profile');
 const popupUserButton = document.querySelector('.profile__button_actions_add');
 const infoButton = document.querySelector('.profile__button_actions_edit');
 const popupCardAdd = document.querySelector('.popup_card_add');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_job');
 const popupInputCity = document.querySelector('.popup__input_type_title');
 const popupInputLink = document.querySelector('.popup__input_type_link');
 const popupCardPhoto = document.querySelector('.popup_photo_card');
@@ -25,19 +25,19 @@ const generateElementList = (cardData) => {
   const likeElements = templateElements.querySelector('.card__like');
   const elementsDelete = templateElements.querySelector('.card__delete');
   const elementsImgCard = templateElements.querySelector('.card__image');
-  const titleElements = templateElements.querySelector('.card__city');
   elementsImgCard.src = cardData.link;
+  elementsImgCard.alt = cardData.city;
   titleNewElements.textContent = cardData.city;
 
-  function ImageCard(){
+  function imageCard(){
     popupImageCard.src = elementsImgCard.src;
-    popupImageCard.alt = titleElements.textContent;
-    popupTitleCard.textContent = titleElements.textContent;
+    popupImageCard.alt = titleNewElements.textContent;
+    popupTitleCard.textContent = titleNewElements.textContent;
     openPopup(popupCardPhoto);
   }
 
-  elementsImgCard.addEventListener('click', ImageCard);
-  elementsDelete.addEventListener('click', DeleteCard);
+  elementsImgCard.addEventListener('click', imageCard);
+  elementsDelete.addEventListener('click', deleteCard);
   likeElements.addEventListener('click', like);
   return templateElements;
 };
@@ -56,7 +56,7 @@ const submitAddCard = (evt) => {
     closePopup(popupCardAdd);
 };
 
-const DeleteCard = (evt) => {
+const deleteCard = (evt) => {
   evt.target.closest('.card__item').remove();
 };
 

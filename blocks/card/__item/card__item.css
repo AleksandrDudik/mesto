@@ -4,7 +4,7 @@
   min-height: 361px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background: white;
   border-radius: 10px;
   overflow: hidden;
