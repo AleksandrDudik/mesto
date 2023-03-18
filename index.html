@@ -43,8 +43,14 @@
       <button type="button" class="popup__close popup__close_profile"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="popupform" class="popup__form">
-        <input type="text" value="" name="name" placeholder="Имя" class="popup__input popup__input_type_name">
-        <input type="text" value="" name="job" placeholder="Профессия" class="popup__input popup__input_type_job">
+        <label class="popup__field">
+          <input type="text" id="name" name="name" maxlength="40" minlength="2" value="" placeholder="Имя" required class="popup__input popup__input_type_name">
+          <span class="popup__error name-error">Ошибка</span>
+        </label>
+        <label class="popup__field">
+          <input type="text" id="job" name="job" maxlength="200" minlength="2" value="" placeholder="Профессия" required class="popup__input popup__input_type_job">
+          <span class="popup__error job-error">Ошибка</span>
+        </label>
         <button type="submit" class="popup__button">Сохранить</button>
       </form>
     </div>
@@ -54,8 +60,14 @@
       <button type="button" class="popup__close popup__close_new-card"></button>
       <h2 class="popup__title">Новая карточка</h2>
       <form name="form-info" class="popup__form popup__forms">
-        <input type="text" value="" placeholder="Название" class="popup__input popup__input_type_title">
-        <input type="url" value="" placeholder="Ссылка на картинку" class="popup__input  popup__input_type_link">
+        <label class="popup__field">
+          <input type="text" id="city" name="city" value="" placeholder="Название" required class="popup__input popup__input_type_city">
+          <span class="popup__error city-error">Ошибка</span>
+        </label>
+        <label class="popup__field">
+          <input type="url" id="link" name="link" maxlength="30" minlength="2" value="" placeholder="Ссылка на картинку" required class="popup__input  popup__input_type_link">
+          <span class="popup__error link-error">Ошибка</span>
+        </label>
         <button type="submit" class="popup__button">Создать</button>
       </form>
     </div>
@@ -71,6 +83,7 @@
     </li>
   </template>
   <script type="text/javascript" src="scripts/start-array.js"></script>
+  <script type="text/javascript" src="scripts/validate.js"></script>
   <script type="text/javascript" src="scripts/scripts.js"></script>
 </body>
 </html>
