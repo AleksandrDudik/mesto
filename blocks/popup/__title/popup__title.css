@@ -7,7 +7,7 @@
   font-weight: 900;
   line-height: 29px;
   text-overflow: ellipsis;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 @media (max-width: 535px){
