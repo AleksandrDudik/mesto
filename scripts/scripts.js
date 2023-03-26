@@ -16,13 +16,13 @@ const popuphandleOpenImagePopup = document.querySelector('.popup__zoom-card');
 const popupTitleCard = document.querySelector('.popup__title-card');
 const popupButtonClosePhoto = document.querySelector('.popup__close_photo');
 const popupButtonCloseCard = document.querySelector('.popup__close_new-card');
-const elementsTemplate = document.querySelector('#cards-add').content.querySelector('.card__template');
+const cardTemplate = document.querySelector('#cards-add').content.querySelector('.card__template');
 const cardsContainer = document.querySelector('.card');
 const popups = document.querySelectorAll('.popup');
-const inactive = document.getElementById('inactive');
+const cardFormSubmitButton = document.getElementById('inactive');
 
 const generateCard = (cardData) => {
-  const templateElements = elementsTemplate.cloneNode(true);
+  const templateElements = cardTemplate.cloneNode(true);
   const titleNewElements = templateElements.querySelector('.card__city');
   const likeElements = templateElements.querySelector('.card__like');
   const elementsDelete = templateElements.querySelector('.card__delete');
@@ -93,14 +93,14 @@ function handleProfileFormSubmit(evt) {
   closePopupFormEdit();
 };
 
-function buttonDisabled() {
-  inactive.classList.add('popup__button_disabled');
-  inactive.disabled = true;
+function disableCardFormSubmitButton() {
+  cardFormSubmitButton.classList.add('popup__button_disabled');
+  cardFormSubmitButton.disabled = true;
 }
 
 function openFormAddPhoto() {
   openPopup(popupCardAdd);
-  buttonDisabled();
+  disableCardFormSubmitButton();
 };
 
 function closePopupViewPhoto() {

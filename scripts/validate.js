@@ -3,7 +3,6 @@ const hasInvalidInput = (inputList) => {
 };
 
 const toggleButtonState = (inputList, buttonElement, { inactiveButtonClass, ...last }) => {
-  inputList.forEach((input) => input.setCustomValidity(''));
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true;
