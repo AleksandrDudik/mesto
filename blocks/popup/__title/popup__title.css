@@ -8,6 +8,7 @@
   line-height: 29px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-height: 70px;
 }
 
 @media (max-width: 535px){

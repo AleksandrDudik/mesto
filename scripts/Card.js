@@ -2,40 +2,43 @@ export default class Card {
   constructor(data, cardTemplateSelector) {
     this._city = data.city;
     this._link = data.link;
-    this._template = cardTemplateSelector;
+    this.handleOpenImagePopup = data.handleOpenImagePopup;
+    this._template = document.querySelector(cardTemplateSelector).content;
   }
 
-  generateCard(data) {
-    const templateElements = this._template.cloneNode(true);
-    const titleNewElements = templateElements.querySelector('.card__city');
-    const likeElements = templateElements.querySelector('.card__like');
-    const elementsDelete = templateElements.querySelector('.card__delete');
-    const elementsImgCard = templateElements.querySelector('.card__image');
-    elementsImgCard.src = this._link;
-    elementsImgCard.alt = this._city;
-    titleNewElements.textContent = this._city;
-
-    function handleOpenImagePopup() {
-      const popupCardPhoto = document.querySelector('.popup_photo_card');
-      const popuphandleOpenImagePopup = document.querySelector('.popup__zoom-card');
-      const popupTitleCard = document.querySelector('.popup__title-card');
-      popuphandleOpenImagePopup.src = elementsImgCard.src;
-      popuphandleOpenImagePopup.alt = titleNewElements.textContent;
-      popupTitleCard.textContent = titleNewElements.textContent;
-      popupCardPhoto.classList.add('popup_opened');;
-    }
-
-    elementsImgCard.addEventListener('click', handleOpenImagePopup);
-    elementsDelete.addEventListener('click', this._deleteCard);
-    likeElements.addEventListener('click', this._handleLikeClick);
-    return templateElements;
+  _deleteCard() {
+    this._newCard.remove();
   };
 
-  _deleteCard(evt) {
-    evt.target.closest('.card__template').remove();
+  _handleLikeClick() {
+    this._likeActive.classList.toggle('card__like_active');
   };
 
-  _handleLikeClick(evt) {
-    evt.target.classList.toggle('card__like_active');
+  _setEventListeners() {
+    this._likeActive = this._newCard.querySelector('.card__like');
+    this._likeActive.addEventListener('click', () => {
+      this._handleLikeClick();
+    });
+    this._buttonDelete = this._newCard.querySelector('.card__delete');
+    this._buttonDelete.addEventListener('click', () => {
+      this._deleteCard();
+    });
+    this._newCard.querySelector('.card__image').addEventListener('click', () => {
+      this.handleOpenImagePopup(this);
+    });
+  }
+
+  generateCard() {
+    this._newCard = this._template.querySelector('.card__template').cloneNode(true);
+    this._setEventListeners();
+
+    this._titleNewElements = this._newCard.querySelector('.card__city');
+    this._elementsImgCard = this._newCard.querySelector('.card__image');
+    this._elementsImgCard.src = this._link;
+    this._elementsImgCard.alt = this._city;
+    this._titleNewElements.textContent = this._city;
+    
+    return this._newCard;
   };
+
 }

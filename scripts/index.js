@@ -1,35 +1,9 @@
-import Card from "./Card.js";
+﻿import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-
-const initialCards = [
-  {
-    city: 'Дедовск',
-    link: './images/dedovsk.jpg'
-  },
-  {
-    city: 'Истра',
-    link: './images/istra.jpg'
-  },
-  {
-    city: 'Москва',
-    link: './images/moscow.jpg'
-  },
-  {
-    city: 'Нахабино',
-    link: './images/nakhabino.jpg'
-  },
-  {
-    city: 'Екатеринбург',
-    link: './images/ekaterinburg.jpg'
-  },
-  {
-    city: 'Зеленоград',
-    link: './images/zelenograd.jpg'
-  }
-];
+import {initialCards, configuration} from "./constants.js";
 
 const popupEditForm = document.querySelector('.popup__form');
-const popupEditForms = document.querySelector('.popup__forms');
+const popupEditFormAddCard = document.querySelector('.popup__form_add');
 const nameGet = document.querySelector('.profile__name');
 const jobGet = document.querySelector('.profile__profession');
 const popupCloseProfile = document.querySelector('.popup__close_profile');
@@ -42,14 +16,14 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const popupInputCity = document.querySelector('.popup__input_type_city');
 const popupInputLink = document.querySelector('.popup__input_type_link');
 const popupCardPhoto = document.querySelector('.popup_photo_card');
+const popuphandleOpenImagePopup = document.querySelector('.popup__zoom-card');
+const popupTitleCard = document.querySelector('.popup__title-card');
 const popupButtonClosePhoto = document.querySelector('.popup__close_photo');
 const popupButtonCloseCard = document.querySelector('.popup__close_new-card');
-const cardTemplate = document.querySelector('#cards-add').content.querySelector('.card__template');
 const cardsContainer = document.querySelector('.card');
 const popups = document.querySelectorAll('.popup');
-const cardFormSubmitButton = document.getElementById('inactive');
+const cardTemplateSelector = '#cards-add';
 
-const configuration = {inputSelector: '.popup__input', submitButtonSelector: '.popup__button', inactiveButtonClass: 'popup__button_disabled', inputErrorClass: 'popup__input_type_error', errorClass: 'popup__error_visible'};
 const profileFormValidator = new FormValidator(configuration, popupEditProfile);
 const cardFormValidator = new FormValidator(configuration, popupCardAdd);
 
@@ -58,15 +32,16 @@ const handleCardFormSubmit = (evt) => {
     renderCard({
       city: popupInputCity.value,
       link: popupInputLink.value,
+      handleOpenImagePopup: handleOpenImagePopup,
     });
     closePopup(popupCardAdd);
     evt.target.reset();
 };
 
 const createCard = (cardData) => {
-  const cards = new Card(cardData, cardTemplate);
-  const elementList = cards.generateCard(cardData);
-  return elementList;
+  const cards = new Card(cardData, cardTemplateSelector);
+  const newCard = cards.generateCard(cardData);
+  return newCard;
 }
 
 const renderCard = (cardData) => {
@@ -78,6 +53,13 @@ function openPopup(element) {
   element.classList.add('popup_opened');
 };
 
+const handleOpenImagePopup = (data) => {
+  openPopup(popupCardPhoto);
+  popuphandleOpenImagePopup.src = data._link;
+  popuphandleOpenImagePopup.alt = data._name;
+  popupTitleCard.textContent = data._name;
+}
+
 function closePopup(popup) {
   document.removeEventListener('keydown', handleClosePopupByEsc);
   popup.classList.remove('popup_opened');
@@ -87,7 +69,6 @@ function openEditProfilePopup() {
   openPopup(popupEditProfile);
   nameInput.value = nameGet.textContent;
   jobInput.value = jobGet.textContent;
-  profileFormValidator.enableValidation();
 };
 
 function closePopupFormEdit() {
@@ -101,15 +82,9 @@ function handleProfileFormSubmit(evt) {
   closePopupFormEdit();
 };
 
-function disableCardFormSubmitButton() {
-  cardFormSubmitButton.classList.add('popup__button_disabled');
-  cardFormSubmitButton.disabled = true;
-}
-
 function openFormAddPhoto() {
+  cardFormValidator.toggleButtonState();
   openPopup(popupCardAdd);
-  disableCardFormSubmitButton();
-  cardFormValidator.enableValidation();
 };
 
 function closePopupViewPhoto() {
@@ -121,7 +96,12 @@ function closePopupAddPhoto() {
 };
 
 initialCards.forEach((cardData) => {
-  renderCard(cardData);
+  const data = {
+    city: cardData.city,
+    link: cardData.link,
+    handleOpenImagePopup: handleOpenImagePopup,
+  }
+  renderCard(data);
 });
 
 function handleClosePopupByEsc(evt) {
@@ -132,12 +112,15 @@ function handleClosePopupByEsc(evt) {
 }
 
 popupEditForm.addEventListener('submit', handleProfileFormSubmit);
-popupEditForms.addEventListener('submit', handleCardFormSubmit);
+popupEditFormAddCard.addEventListener('submit', handleCardFormSubmit);
 popupUserButton.addEventListener('click', openFormAddPhoto);
 infoButton.addEventListener('click', openEditProfilePopup);
 popupButtonClosePhoto.addEventListener('click', closePopupViewPhoto);
 popupButtonCloseCard.addEventListener('click', closePopupAddPhoto);
 popupCloseProfile.addEventListener('click', closePopupFormEdit);
+
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 popups.forEach((popup) =>
   popup.addEventListener('mousedown', (evt) => {
