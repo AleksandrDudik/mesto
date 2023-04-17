@@ -2,7 +2,7 @@
 import FormValidator from "./FormValidator.js";
 import {initialCards, configuration} from "./constants.js";
 
-const popupEditForm = document.querySelector('.popup__form');
+const popupEditFormProfile = document.querySelector('.popup__form_edit');
 const popupEditFormAddCard = document.querySelector('.popup__form_add');
 const nameGet = document.querySelector('.profile__name');
 const jobGet = document.querySelector('.profile__profession');
@@ -39,8 +39,8 @@ const handleCardFormSubmit = (evt) => {
 };
 
 const createCard = (cardData) => {
-  const cards = new Card(cardData, cardTemplateSelector);
-  const newCard = cards.generateCard(cardData);
+  const card = new Card(cardData, cardTemplateSelector);
+  const newCard = card.generateCard(cardData);
   return newCard;
 }
 
@@ -53,11 +53,11 @@ function openPopup(element) {
   element.classList.add('popup_opened');
 };
 
-const handleOpenImagePopup = (data) => {
+const handleOpenImagePopup = (city, link) => {
   openPopup(popupCardPhoto);
-  popuphandleOpenImagePopup.src = data._link;
-  popuphandleOpenImagePopup.alt = data._name;
-  popupTitleCard.textContent = data._name;
+  popuphandleOpenImagePopup.src = link;
+  popuphandleOpenImagePopup.alt = city;
+  popupTitleCard.textContent = city;
 }
 
 function closePopup(popup) {
@@ -111,7 +111,7 @@ function handleClosePopupByEsc(evt) {
   }
 }
 
-popupEditForm.addEventListener('submit', handleProfileFormSubmit);
+popupEditFormProfile.addEventListener('submit', handleProfileFormSubmit);
 popupEditFormAddCard.addEventListener('submit', handleCardFormSubmit);
 popupUserButton.addEventListener('click', openFormAddPhoto);
 infoButton.addEventListener('click', openEditProfilePopup);

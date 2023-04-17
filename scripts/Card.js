@@ -24,7 +24,7 @@ export default class Card {
       this._deleteCard();
     });
     this._newCard.querySelector('.card__image').addEventListener('click', () => {
-      this.handleOpenImagePopup(this);
+      this.handleOpenImagePopup(this._city, this._link);
     });
   }
 
