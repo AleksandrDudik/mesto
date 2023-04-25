@@ -2,7 +2,7 @@ export default class Card {
   constructor(data, cardTemplateSelector) {
     this._city = data.city;
     this._link = data.link;
-    this.handleOpenImagePopup = data.handleOpenImagePopup;
+    this.handleCardClick = data.handleCardClick;
     this._template = document.querySelector(cardTemplateSelector).content;
   }
 
@@ -24,7 +24,7 @@ export default class Card {
       this._deleteCard();
     });
     this._newCard.querySelector('.card__image').addEventListener('click', () => {
-      this.handleOpenImagePopup(this._city, this._link);
+      this.handleCardClick(this._city, this._link);
     });
   }
 
