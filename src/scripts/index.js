@@ -1,4 +1,4 @@
-﻿import '../pages/index.css';
+﻿import "../pages/index.css";
 
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
@@ -62,8 +62,8 @@ const handleCardFormSubmit = (evt) => {
 
 function handleProfileFormSubmit(evt) {
   const inputList = inputValues.setUserInfo(nameGet, jobGet);
-  inputList.name; = nameInput.value;
-  inputList.job; = jobInput.value;
+  inputList.name = nameInput.value;
+  inputList.job = jobInput.value;
   popupOpenProfile.close();
 };
 

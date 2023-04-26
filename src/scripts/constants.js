@@ -1,27 +1,34 @@
-﻿export const initialCards = [
+﻿import l1 from '../images/dedovsk.jpg';
+import l2 from '../images/istra.jpg';
+import l3 from '../images/moscow.jpg';
+import l4 from '../images/nakhabino.jpg';
+import l5 from '../images/ekaterinburg.jpg';
+import l6 from '../images/zelenograd.jpg';
+
+export const initialCards = [
   {
     city: 'Дедовск',
-    link: './images/dedovsk.jpg'
+    link: l1
   },
   {
     city: 'Истра',
-    link: './images/istra.jpg'
+    link: l2
   },
   {
     city: 'Москва',
-    link: './images/moscow.jpg'
+    link: l3
   },
   {
     city: 'Нахабино',
-    link: './images/nakhabino.jpg'
+    link: l4
   },
   {
     city: 'Екатеринбург',
-    link: './images/ekaterinburg.jpg'
+    link: l5
   },
   {
     city: 'Зеленоград',
-    link: './images/zelenograd.jpg'
+    link: l6
   }
 ];
 
