@@ -12,7 +12,6 @@ const popupEditFormProfile = document.querySelector('.popup__form_edit');
 const popupEditFormAddCard = document.querySelector('.popup__form_add');
 const nameGet = document.querySelector('.profile__name');
 const jobGet = document.querySelector('.profile__profession');
-const popupCloseProfile = document.querySelector('.popup__close_profile');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
 const popupUserButton = document.querySelector('.profile__button_actions_add');
 const infoButton = document.querySelector('.profile__button_actions_edit');
@@ -20,8 +19,6 @@ const popupCardAdd = document.querySelector('.popup_card_add');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const popupCardPhoto = document.querySelector('.popup_photo_card');
-const popupButtonClosePhoto = document.querySelector('.popup__close_photo');
-const popupButtonCloseCard = document.querySelector('.popup__close_new-card');
 const cardsContainer = document.querySelector('.card');
 const cardTemplateSelector = '#cards-add';
 
@@ -36,20 +33,20 @@ initialCards.forEach((item) => {
     link: item.link,
     handleCardClick: handleCardClick,
   }
-  defaultCardList.renderItems(data);
+  defaultCardList.renderItems();
 });
 
 const handleCardClick = (city, link) => {
-  openPopupFoto.open(city, link);
+  popupOpenFoto.open(city, link);
 }
 
-const openAddFoto = new PopupWithForm(popupEditFormAddCard, { 
+const popupAddFoto = new PopupWithForm(popupEditFormAddCard, { 
   handleCardFormSubmit: (data) => {
     defaultCardList.addItem(createCard(data, cardTemplateSelector));
-    openAddFoto.close();
+    popupAddFoto.close();
   }
 });
-openAddFoto.setEventListeners();
+popupAddFoto.setEventListeners();
 
 const popupOpenProfile = new PopupWithForm(popupEditFormProfile, { 
   handleProfileFormSubmit: ({name, job}) => {
@@ -59,8 +56,8 @@ const popupOpenProfile = new PopupWithForm(popupEditFormProfile, {
 });
 popupOpenProfile.setEventListeners();
 
-const openPopupFoto = new PopupWithImage(popupCardPhoto);
-openPopupFoto.setEventListeners();
+const popupOpenFoto = new PopupWithImage(popupCardPhoto);
+popupOpenFoto.setEventListeners();
 
 function createCard(item, cardTemplateSelector) {
   const card = new Card(item, cardTemplateSelector);
@@ -77,21 +74,9 @@ const inputValues = new UserInfo({
   job: jobGet,
 });
 
-function closePopupViewPhoto() {
-  openPopupFoto.close();
-};
-
-function closePopupAddPhoto() {
-  openAddFoto.close();
-};
-
-function closePopupFormEdit() {
-  popupOpenProfile.close();
-};
-
 function openFormAddPhoto() {
   cardFormValidator.toggleButtonState();
-  openAddFoto.open();
+  popupAddFoto.open();
 };
 
 function openEditProfilePopup() {
@@ -103,6 +88,3 @@ function openEditProfilePopup() {
 
 popupUserButton.addEventListener('click', openFormAddPhoto);
 infoButton.addEventListener('click', openEditProfilePopup);
-popupButtonClosePhoto.addEventListener('click', closePopupViewPhoto);
-popupButtonCloseCard.addEventListener('click', closePopupAddPhoto);
-popupCloseProfile.addEventListener('click', closePopupFormEdit);
