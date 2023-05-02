@@ -17,7 +17,7 @@ const popupCardAdd = document.querySelector('.popup_card_add');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const popupCardPhoto = document.querySelector('.popup_photo_card');
-const cardsContainer = document.querySelector('.card');
+const cardsContainer = '.card';
 const cardTemplateSelector = '#cards-add';
 
 const profileFormValidator = new FormValidator(configuration, popupEditProfile);
