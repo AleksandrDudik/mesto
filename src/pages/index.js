@@ -6,10 +6,8 @@ import UserInfo from "../scripts/UserInfo.js";
 import Section from "../scripts/Section.js";
 import PopupWithImage from "../scripts/PopupWithImage.js";
 import PopupWithForm from "../scripts/PopupWithForm.js";
-import {initialCards, configuration} from "../utils/constants.css";
+import {initialCards, configuration} from "../utils/constants.js";
 
-const popupEditFormProfile = document.querySelector('.popup__form_edit');
-const popupEditFormAddCard = document.querySelector('.popup__form_add');
 const nameGet = document.querySelector('.profile__name');
 const jobGet = document.querySelector('.profile__profession');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
@@ -27,20 +25,17 @@ const cardFormValidator = new FormValidator(configuration, popupCardAdd);
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
-initialCards.forEach((item) => {
-  const data = {
-    city: item.city,
-    link: item.link,
-    handleCardClick: handleCardClick,
-  }
-  defaultCardList.renderItems();
-});
+let cardsArray = initialCards;
 
 const handleCardClick = (city, link) => {
   popupOpenFoto.open(city, link);
 }
 
-const popupAddFoto = new PopupWithForm(popupEditFormAddCard, { 
+const sectionData = { items: cardsArray, renderer: (item) => defaultCardList.addItem(createCard(item, cardTemplateSelector)) };
+const defaultCardList = new Section(sectionData, cardsContainer);
+defaultCardList.renderItems();
+
+const popupAddFoto = new PopupWithForm(popupCardPhoto, { 
   handleCardFormSubmit: (data) => {
     defaultCardList.addItem(createCard(data, cardTemplateSelector));
     popupAddFoto.close();
@@ -48,7 +43,7 @@ const popupAddFoto = new PopupWithForm(popupEditFormAddCard, {
 });
 popupAddFoto.setEventListeners();
 
-const popupOpenProfile = new PopupWithForm(popupEditFormProfile, { 
+const popupOpenProfile = new PopupWithForm(popupEditProfile, { 
   handleProfileFormSubmit: ({name, job}) => {
     inputValues.setUserInfo({name, job});
     popupOpenProfile.close();
@@ -64,10 +59,6 @@ function createCard(item, cardTemplateSelector) {
   const newCard = card.generateCard(item);
   return newCard;
 }
-
-const defaultCardList = new Section({
-  renderer: (item) => defaultCardList.addItem(createCard(item, cardTemplateSelector))
-}, cardsContainer);
 
 const inputValues = new UserInfo({
   name: nameGet,
