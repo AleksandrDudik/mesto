@@ -27,25 +27,21 @@ cardFormValidator.enableValidation();
 
 let cardsArray = initialCards;
 
-const handleCardClick = (city, link) => {
-  popupOpenFoto.open(city, link);
-}
-
 const sectionData = { items: cardsArray, renderer: (item) => defaultCardList.addItem(createCard(item, cardTemplateSelector)) };
 const defaultCardList = new Section(sectionData, cardsContainer);
 defaultCardList.renderItems();
 
-const popupAddFoto = new PopupWithForm(popupCardPhoto, { 
-  handleCardFormSubmit: (data) => {
-    defaultCardList.addItem(createCard(data, cardTemplateSelector));
+const popupAddFoto = new PopupWithForm({popupSelector: popupCardAdd,  
+  handleFormSubmit: (data) => {
+    defaultCardList.addItem(createCard(data));
     popupAddFoto.close();
   }
 });
 popupAddFoto.setEventListeners();
 
-const popupOpenProfile = new PopupWithForm(popupEditProfile, { 
-  handleProfileFormSubmit: ({name, job}) => {
-    inputValues.setUserInfo({name, job});
+const popupOpenProfile = new PopupWithForm({popupSelector: popupEditProfile,  
+  handleFormSubmit: (data) => {
+    inputValues.setUserInfo({name: data.name, job: data.job});
     popupOpenProfile.close();
   }
 });
@@ -54,16 +50,13 @@ popupOpenProfile.setEventListeners();
 const popupOpenFoto = new PopupWithImage(popupCardPhoto);
 popupOpenFoto.setEventListeners();
 
-function createCard(item, cardTemplateSelector) {
-  const card = new Card(item, cardTemplateSelector);
-  const newCard = card.generateCard(item);
+function createCard(item) {
+  const card = new Card({data: item, handleCardClick: (clickedItem) => {popupOpenFoto.open(clickedItem);}, }, cardTemplateSelector);
+  const newCard = card.generateCard();
   return newCard;
 }
 
-const inputValues = new UserInfo({
-  name: nameGet,
-  job: jobGet,
-});
+const inputValues = new UserInfo({selectorUserName: nameGet, selectorUserJob: jobGet});
 
 function openFormAddPhoto() {
   cardFormValidator.toggleButtonState();

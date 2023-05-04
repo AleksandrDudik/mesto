@@ -7,10 +7,10 @@ export default class PopupWithImage extends Popup {
     this._cityCard = this._popup.querySelector('.popup__title-card');
   }
 
-  open(city, link) {
+  open(data) {
     super.open();
-    this._imgCard.src = link;
-    this._imgCard.alt = city;
-    this._cityCard.textContent = city;
+    this._imgCard.src = data.link;
+    this._imgCard.alt = data.city;
+    this._cityCard.textContent = data.city;
   }
 };

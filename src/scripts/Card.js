@@ -1,8 +1,8 @@
 export default class Card {
-  constructor(data, cardTemplateSelector) {
+  constructor({data, handleCardClick}, cardTemplateSelector) {
     this._city = data.city;
     this._link = data.link;
-    this.handleCardClick = data.handleCardClick;
+    this._handleCardClick = handleCardClick;
     this._template = document.querySelector(cardTemplateSelector).content;
   }
 
@@ -16,6 +16,7 @@ export default class Card {
   };
 
   _setEventListeners() {
+    const data = { city: this._city, link: this._link };
     this._likeActive = this._newCard.querySelector('.card__like');
     this._likeActive.addEventListener('click', () => {
       this._handleLikeClick();
@@ -25,7 +26,7 @@ export default class Card {
       this._deleteCard();
     });
     this._newCard.querySelector('.card__image').addEventListener('click', () => {
-      this.handleCardClick(this._city, this._link);
+      this._handleCardClick(data);
     });
   }
 
