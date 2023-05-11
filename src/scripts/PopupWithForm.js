@@ -23,6 +23,11 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  open() {
+    super.open();
+    this.handleLoading('Сохранить');
+  }
+
   close() {
     super.close();
     this._form.reset();
@@ -30,6 +35,7 @@ export default class PopupWithForm extends Popup {
 
   _submitEvtHandler(evt) {
     evt.preventDefault();
+    this.handleLoading('Сохранение..');
     this._handleFormSubmit(this._getInputValues());
   }
 

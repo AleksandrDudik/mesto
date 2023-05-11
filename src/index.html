@@ -2,9 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Проектная работа № 7 Александра Дудика на Яндекс Практикуме">
+  <meta name="description" content="Проектная работа № 9 Александра Дудика на Яндекс Практикуме">
   <meta name="keywords" content="html, css, js">
   <meta name="author" content="Александр Дудик">
   <title>Место - площадка для добавления фото из мест России</title>
@@ -15,7 +14,10 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля" class="profile__avatar">
+        <button type="button" class="profile__button profile__button_actions_avatar button"></button>
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__profession">Исследователь океана</p>
@@ -48,8 +50,8 @@
           <span class="popup__error name-error">Ошибка</span>
         </label>
         <label class="popup__field">
-          <input type="text" id="job" name="job" maxlength="200" minlength="2" placeholder="Профессия" required class="popup__input popup__input_type_job">
-          <span class="popup__error job-error">Ошибка</span>
+          <input type="text" id="about" name="about" maxlength="200" minlength="2" placeholder="Профессия" required class="popup__input popup__input_type_job">
+          <span class="popup__error about-error">Ошибка</span>
         </label>
         <button type="submit" class="popup__button" disabled>Сохранить</button>
       </form>
@@ -72,16 +74,40 @@
       </form>
     </div>
   </article>
+  <article class="popup popup_confirm_delete">
+    <div class="popup__container">
+      <button type="button" class="popup__close popup__close_confirm-delete"></button>
+      <form name="form-confirm" class="popup__form popup__form_confirm" novalidate>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__button popup__button-delete">Да</button>
+      </form>
+    </div>
+  </article>
+  <article class="popup popup_edit_avatar">
+    <div class="popup__container">
+      <button type="button" class="popup__close popup__close_avatar"></button>
+      <form name="popupformavatar" class="popup__form popup__form_avatar" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <label class="popup__field">
+          <input type="url" id="avatar" name="avatar" placeholder="Ссылка на картинку" required class="popup__input popup__input_type_avatar">
+          <span class="popup__error avatar-error">Ошибка</span>
+        </label>
+        <button type="submit" class="popup__button" disabled>Сохранить</button>
+      </form>
+    </div>
+  </article>
   <template id="cards-add">
     <li class="card__template">
       <button type="button" class="card__delete"></button>
       <img src="#" alt="Изображение места" class="card__image">
       <div class="card__container">
         <h2 class="card__city"></h2>
-        <button type="button" class="card__like"></button>
+        <div class="card__like_container"></div>>
+          <button type="button" class="card__like"></button>
+          <span class="card__like_count">0</span>
+        </div>
       </div>
     </li>
   </template>
-  
 </body>
 </html>
