@@ -2,7 +2,6 @@ export default class Popup {
   constructor(popupSelector) {
     this._popup = popupSelector;
     this._buttonClose = this._popup.querySelector('.popup__close');
-    this._buttonSubmit = this._popup.querySelector('.popup__button');
   }
 
   open() {
@@ -25,10 +24,6 @@ export default class Popup {
     if (evt.target === evt.currentTarget) {
       this.close();
     };
-  }
-
-  handleLoading(message) {
-    this._buttonSubmit.textContent = message;
   }
 
   setEventListeners() {
