@@ -1,13 +1,13 @@
 ﻿import "./index.css";
 
-import Api from "../scripts/Api.js";
-import Card from "../scripts/Card.js";
-import FormValidator from "../scripts/FormValidator.js";
-import UserInfo from "../scripts/UserInfo.js";
-import Section from "../scripts/Section.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import PopupWithDelete from "../scripts/PopupWithDelete.js";
+import Api from "../components/Api.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithDelete from "../components/PopupWithDelete.js";
 import {configuration} from "../utils/constants.js";
 
 const api = new Api({
@@ -94,7 +94,9 @@ const popupAddFoto = new PopupWithForm({popupSelector: popupCardAdd,
   handleFormSubmit: (newData) => {
     api.postCards(newData)
     .then((data) => {
-      defaultCardList.addItem(createCard(data));
+      const card = createCard(data);
+      const newCardElement = card.generateCard();
+      defaultCardList.addItem(newCardElement);
       popupAddFoto.close();
     })
     .catch((err) => console.log(err))
@@ -106,7 +108,7 @@ const popupOpenProfile = new PopupWithForm({popupSelector: popupEditProfile,
   handleFormSubmit: (newData) => {
     api.setApiUserInfo(newData)
     .then((data) => {
-      inputValues.setUserInfo({name: data.name, about: data.about});
+      inputValues.setUserInfo(data);
       popupOpenProfile.close();
     })
     .catch((err) => console.log(err))
@@ -147,8 +149,7 @@ function openEditProfilePopup() {
 function openEditAvatarPopup() {
   avatarFormValidator.toggleButtonState();
   popupOpenAvatar.open();
-  const inputAvatar = inputValues.getUserInfo();
-  avatarInput.value = inputAvatar.avatar;
+  avatarInput.value = '';
 };
 
 popupUserButton.addEventListener('click', openFormAddPhoto);
@@ -157,10 +158,8 @@ avatarButton.addEventListener('click', openEditAvatarPopup);
 
 Promise.all([api.getCards(), api.getApiUserInfo()])
     .then(([cards, userData]) => {
-
         userId = userData._id;
         defaultCardList.renderItems(cards);
         inputValues.setUserInfo(userData);
-
     })
     .catch((err) => console.log(err));

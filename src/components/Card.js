@@ -1,9 +1,9 @@
 export default class Card {
   constructor(data, cardTemplateSelector, {handleCardClick, handleConfirmDelete, setLike, removeLike}, userId) {
-    this._data = data;
-    this._city = data.city;
+    this._city = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._data = data;
     this._ownerId = data.owner._id;
     this._setLike = setLike;
     this._removeLike = removeLike;
@@ -37,7 +37,6 @@ export default class Card {
   }
 
   _setEventListeners() {
-    const data = { city: this._city, link: this._link, likes: this._likes };
     this._likeActive = this._newCard.querySelector('.card__like');
     this._likeActive.addEventListener('click', () => {
       if (this._likeActive.classList.contains('card__like_active')) {
